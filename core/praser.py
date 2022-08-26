@@ -35,7 +35,9 @@ def init_obj(opt, logger, *args, default_file_name='default file', given_module=
         
         attr = getattr(module, class_name)
         kwargs = opt.get('args', {})
+        #print('kwargs=',kwargs)
         kwargs.update(modify_kwargs)
+        #print('updated kwargs=',kwargs)
         ''' import class or function with args '''
         if isinstance(attr, type): 
             ret = attr(*args, **kwargs)

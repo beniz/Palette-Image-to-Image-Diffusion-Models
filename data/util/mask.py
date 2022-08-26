@@ -96,7 +96,6 @@ def random_bbox(img_shape=(256,256), max_bbox_shape=(128, 128), max_bbox_delta=4
     w = max_mask_w - delta_left
     return (top, left, h, w)
 
-
 def bbox2mask(img_shape, bbox, dtype='uint8'):
     """Generate mask in ndarray from bbox.
 

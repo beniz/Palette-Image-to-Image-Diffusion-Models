@@ -1,3 +1,4 @@
+import sys
 import torch.utils.data as data
 from torchvision import transforms
 from PIL import Image
@@ -25,6 +26,21 @@ def make_dataset(dir):
                     images.append(path)
 
     return images
+
+def make_bbox_dataset(dir):
+    if os.path.isfile(dir):
+        images = []
+        bboxes = []
+        with open(dir, 'r') as f:
+            for line in f:
+                imagepath, bboxpath = line.rstrip().split()
+                images.append(imagepath)
+                bboxes.append(bboxpath)
+    else:
+        print('not a file', dir)
+        sys.exit()
+
+    return images, bboxes
 
 def pil_loader(path):
     return Image.open(path).convert('RGB')
