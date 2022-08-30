@@ -107,7 +107,7 @@ class InpaintDataset(data.Dataset):
 
 
 class InpaintBBoxDataset(data.Dataset):
-    def __init__(self, data_root, mask_config={}, data_len=-1, image_size=[256, 256], loader=pil_loader):
+    def __init__(self, data_root, mask_config={}, data_len=-1, image_size=[256, 256], loader=pil_loader, category=1):
         imgs, bboxes = make_bbox_dataset(data_root)
         if data_len > 0:
             self.imgs = imgs[:int(data_len)]
@@ -122,8 +122,8 @@ class InpaintBBoxDataset(data.Dataset):
         ])
         self.loader = loader
         self.mask_config = mask_config
-        #self.mask_mode = self.mask_config['mask_mode']
         self.image_size = image_size
+        self.category = category
 
     def __getitem__(self, index):
         ret = {}
@@ -150,7 +150,7 @@ class InpaintBBoxDataset(data.Dataset):
             for line in bbf:
                 bbox = line.split()
                 cat = int(bbox[0])
-                if cat != 3: ## TODO: filter car class in custom BDD100k
+                if cat != self.category:
                     continue
 
                 xmin = math.floor(int(bbox[1]))
