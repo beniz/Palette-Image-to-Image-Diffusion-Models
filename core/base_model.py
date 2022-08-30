@@ -108,12 +108,12 @@ class BaseModel():
     def load_network(self, network, network_label, strict=True):
         if self.opt['path']['resume_state'] is None:
             return 
-        self.logger.info('Beign loading pretrained model [{:s}] ...'.format(network_label))
-
+        self.logger.info('Begin loading pretrained model [{:s}] ...'.format(network_label))
+        
         model_path = "{}_{}.pth".format(self. opt['path']['resume_state'], network_label)
         
         if not os.path.exists(model_path):
-            self.logger.warning('Pretrained model in [{:s}] is not existed, Skip it'.format(model_path))
+            self.logger.warning('Pretrained model in [{:s}] does not existed, Skip it'.format(model_path))
             return
 
         self.logger.info('Loading pretrained model from [{:s}] ...'.format(model_path))
