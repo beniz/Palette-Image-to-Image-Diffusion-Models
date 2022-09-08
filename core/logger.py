@@ -114,7 +114,8 @@ class VisualWriter():
             raise NotImplementedError('You must specify the context of name and result in save_current_results functions of model.')
 
     def close(self):
-        self.writer.close()
+        if self.writer:
+            self.writer.close()
         print('Close the Tensorboard SummaryWriter.')
 
         
